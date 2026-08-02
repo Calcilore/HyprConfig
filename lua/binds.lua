@@ -33,6 +33,12 @@ hl.bind("SUPER + G", hl.dsp.window.move({ out_of_group = true }))
 hl.bind("SUPER + Tab", hl.dsp.group.next())
 hl.bind("SUPER + SHIFT + Tab", hl.dsp.group.prev())
 hl.bind("SUPER + S", hl.dsp.window.set_prop({ prop = "no_screen_share", value = "toggle" }))
+hl.bind("SUPER + SHIFT + left", hl.dsp.group.move_window({ forward = false }))
+hl.bind("SUPER + SHIFT + right", hl.dsp.group.move_window({ forward = true }))
+if Device == "laptop" then
+    hl.bind("SUPER + L", hl.dsp.exec_cmd("hyprlock"))
+    hl.bind("SUPER + SHIFT + L", hl.dsp.exec_cmd("hyprlock & sleep 1; systemctl suspend"))
+end
 
 hl.bind("SUPER + left", hl.dsp.focus({ direction = "l" }))
 hl.bind("SUPER + right", hl.dsp.focus({ direction = "r" }))

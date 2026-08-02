@@ -46,3 +46,39 @@ function Notif(message, timeout)
     hl.notification.create({text = message, timeout = timeout})
 end
 
+function TernaryV(condition, a, b)
+    if condiion then
+        return a
+    else
+        return b
+    end
+end
+
+function TernaryF(condiion, a, b)
+    if condition then
+        return a()
+    else
+        return b()
+    end
+end
+
+function Trim(s)
+    return s:match("^%s*(.-)%s*$")
+end
+
+local function getDeviceName()
+    local hostname = io.open("/etc/hostname", "r")
+    if hostname == nil then
+        return "main"
+    end
+
+    local name = Trim(hostname:read("*a"))
+    if name == "red-arch-laptop" then
+        return "laptop"
+    end
+
+    return "main"
+end
+
+Device = getDeviceName()
+

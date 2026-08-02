@@ -85,7 +85,7 @@ hl.config({
         kb_layout = "us",
         -- kb_variant =
         -- kb_model =
-        -- kb_options =
+        kb_options = TernaryV(Device == "main", "", "altwin:swap_alt_win"),
         -- kb_rules =
 
         numlock_by_default = true,
@@ -93,7 +93,7 @@ hl.config({
         follow_mouse = 1,
         accel_profile = "flat",
 
-        sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
+        sensitivity = TernaryV(Device == "main", 0, 0.33), -- -1.0 - 1.0, 0 means no modification.
 
         focus_on_close = 1,
 
