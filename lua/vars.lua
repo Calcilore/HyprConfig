@@ -98,7 +98,7 @@ hl.config({
         focus_on_close = 1,
 
         touchpad =  {
-            natural_scroll = false,
+            natural_scroll = true,
         },
     },
 
