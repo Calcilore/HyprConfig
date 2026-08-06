@@ -47,14 +47,14 @@ function Notif(message, timeout)
 end
 
 function TernaryV(condition, a, b)
-    if condiion then
+    if condition then
         return a
     else
         return b
     end
 end
 
-function TernaryF(condiion, a, b)
+function TernaryF(condition, a, b)
     if condition then
         return a()
     else

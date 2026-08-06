@@ -93,6 +93,7 @@ end
 
 register_perm_save_bind("float", "SUPER + SHIFT + V", { float = true }, hl.dsp.window.float({ action = "on" }), hl.dsp.window.float({ action = "off" }), {})
 register_perm_save_bind("fullscreen", "SUPER + SHIFT + F", { fullscreen = true }, hl.dsp.window.fullscreen({ action = "set" }), hl.dsp.window.fullscreen({ action = "unset" }), {})
+register_perm_save_bind("immediate", "SUPER + SHIFT + I", { immediate = true }, function() end, function() end, {})
 
 -- Workspace Bind
 for i = 1, 11 do
