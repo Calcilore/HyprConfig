@@ -48,6 +48,9 @@ hl.bind("SUPER + down", hl.dsp.focus({ direction = "d" }))
 hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
+-- hl.bind("SUPER + R", hl.dsp.send_shortcut({ mods = "SUPER", key = "R", window = "initialclass:^com.obsproject.Studio$" }))
+hl.bind("SUPER + R", hl.dsp.exec_cmd('pkill -SIGUSR1 -f "^gpu-screen-recorder"'))
+
 -- Workspace Binds
 BindToNumbers("SUPER", function(i) return hl.dsp.focus({ workspace = tostring(i) }) end)
 BindToNumbers("SUPER + SHIFT", function(i) return function()

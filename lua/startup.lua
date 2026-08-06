@@ -16,6 +16,7 @@ local delay_startup_commands = {
     "flatpak run org.mozilla.Thunderbird",
     "kitty",
     "dolphin",
+    "gpu-screen-recorder -w DP-1 -c mkv -a 'app-inverse:WEBRTC VoiceEngine' -r 300 -o '/home/adam/Videos/obs-out/replays'",
 }
 
 local env_vars = {

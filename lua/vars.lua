@@ -55,7 +55,7 @@ hl.config({
         active_opacity = 1.0,
         inactive_opacity = 1.0,
 
-        -- screen_shader = "/home/adam/.config/hypr/shader.frag"
+        -- screen_shader = "/home/adam/.config/hypr/shader.frag",
 
         shadow = {
             enabled = false,
