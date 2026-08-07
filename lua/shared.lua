@@ -38,12 +38,46 @@ function FizzBuzz()
     end
 end
 
-function Notif(message, timeout)
-    if timeout == nil then
-        timeout = 1000
+function Command(command)
+    local handle = io.popen(command)
+    if handle then
+        local output = handle:read("*a") -- Read all stdout
+        handle:close()
+
+        -- remove the newline at the end if it exists
+        -- Combining this and the line after actually has differing behaviour, do not change it
+        output = output:gsub("%s+$", "")
+        return output
     end
 
-    hl.notification.create({text = message, timeout = timeout})
+    return nil
+end
+
+function TableToString(table)
+    if type(table) ~= "table" then
+        return tostring(table)
+    end
+
+    local output = "{ "
+    local first = true
+    for k, v in pairs(table) do
+        if first then
+            first = false
+        else
+            output = output .. ", "
+        end
+        output = output .. TableToString(k) .. " = " .. TableToString(v)
+    end
+
+    return output .. " }"
+end
+
+function Notif(message, timeout)
+    if timeout == nil then
+        timeout = 3000
+    end
+
+    hl.notification.create({text = tostring(message), timeout = timeout})
 end
 
 function TernaryV(condition, a, b)

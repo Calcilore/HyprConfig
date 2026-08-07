@@ -1,14 +1,3 @@
-local function toggle_discord(key) return function()
-    local window = hl.get_active_window()
-    if window == nil then
-        hl.dispatch(hl.dsp.focus({ window = "initialclass:^(discord)$" }))
-    elseif window.xwayland then
-        return
-    end
-
-    hl.dispatch(hl.dsp.send_shortcut({ mods = "CONTROL + SHIFT", key = key, window = "initialclass:^(discord)$" }))
-end end
-
 -- Applications
 local app_binds = {
     ["SUPER + CONTROL + Return"] = "kitty",
@@ -100,15 +89,24 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), {locked = tru
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), {locked = true})
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), {locked = true})
 
-hl.on("window.active", function(window, _)
-    hl.unbind("Scroll_Lock")
-    hl.unbind("Pause")
+-- local function toggle_discord(key) return function()
+--     local window = hl.get_active_window()
+--     if window == nil then
+--         hl.dispatch(hl.dsp.focus({ window = "initialclass:^(discord)$" }))
+--     elseif window.xwayland then
+--         Notif("hi")
+--         return { ok = false } -- send key press like normal
+--     end
+--
+--     Notif("Short")
+--     hl.dispatch(hl.dsp.send_shortcut({ mods = "CONTROL + SHIFT", key = key, window = "initialclass:^(discord)$" }))
+-- end end
+--
+-- hl.bind("Scroll_Lock", toggle_discord("M"), { auto_consuming = true })
+-- hl.bind("Pause", toggle_discord("D"), { auto_consuming = true })
 
-    if not window.xwayland then
-        hl.bind("Scroll_Lock", toggle_discord("M"))
-        hl.bind("Pause", toggle_discord("D"))
-    end
-end)
+hl.bind("Scroll_Lock", hl.dsp.send_shortcut({ mods = "CONTROL + SHIFT", key = "M", window = "initialclass:^(discord)$" }))
+hl.bind("Pause", hl.dsp.send_shortcut({ mods = "CONTROL + SHIFT", key = "D", window = "initialclass:^(discord)$" }))
 
 -- Submaps
 hl.bind("SUPER + P", hl.dsp.submap("capture"))
