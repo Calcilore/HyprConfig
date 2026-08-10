@@ -9,28 +9,45 @@ local recording = {}
 local is_playbacking = false
 local playback_timers = {}
 
-hl.on("input.keyboard.key", function(key, time, state)
+local function input_logic(state, time)
     if not is_recording then
-        return
+        return false
     end
 
     if recording_first then
         recording_first = false
-        return
+        return false
     end
 
     if not recording_pressed then
         if state ~= 1 then
-            return
+            return false
         end
 
         recording_pressed = true
         start_time = time - 1 -- minus 1 bc timers have a min wait time of 1
     end
 
+    return true
+end
+
+hl.on("input.keyboard.key", function(key, time, state)
+    if not input_logic(state, time) then
+        return
+    end
+
     -- Notif(state .. "ing: " .. tostring(key))
-    table.insert(recording, { time = time - start_time, key = key, state = state })
+    table.insert(recording, { type = "keyboard", time = time - start_time, key = key, state = state })
 end)
+
+-- local function on_mouse(click, state) return function()
+--     if not input_logic(state)
+-- end end
+--
+-- for i = 0, 2 do
+--     hl.bind("mouse:" .. tostring(272 + i), on_mouse(i, 0), { non_consuming = true })
+--     hl.bind("mouse:" .. tostring(272 + i), on_mouse(i, 1), { non_consuming = true, release = true })
+-- end
 
 hl.bind("SUPER + SHIFT + O", function()
     if not is_recording then

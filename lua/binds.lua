@@ -105,8 +105,10 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), {locked = true})
 -- hl.bind("Scroll_Lock", toggle_discord("M"), { auto_consuming = true })
 -- hl.bind("Pause", toggle_discord("D"), { auto_consuming = true })
 
-hl.bind("Scroll_Lock", hl.dsp.send_shortcut({ mods = "CONTROL + SHIFT", key = "M", window = "initialclass:^(discord)$" }))
-hl.bind("Pause", hl.dsp.send_shortcut({ mods = "CONTROL + SHIFT", key = "D", window = "initialclass:^(discord)$" }))
+for _, class in pairs({"discord", "brave-browser"}) do
+    hl.bind("Scroll_Lock", hl.dsp.send_shortcut({ mods = "CONTROL + SHIFT", key = "M", window = "initialclass:^(" .. class .. ")$" }))
+    hl.bind("Pause", hl.dsp.send_shortcut({ mods = "CONTROL + SHIFT", key = "D", window = "initialclass:^(".. class .. ")$" }))
+end
 
 -- Submaps
 hl.bind("SUPER + P", hl.dsp.submap("capture"))
