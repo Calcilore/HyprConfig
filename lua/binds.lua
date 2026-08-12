@@ -4,7 +4,7 @@ local app_binds = {
     ["SUPER + CONTROL + E"] = "dolphin",
     ["SUPER + D"] = "rofi -show drun",
     ["SUPER + C"] = "qalculate-qt",
-    ["Print"] = 'region=$(slurp) && grim -g "$region" - | tee "/home/adam/Pictures/Screenshots/Screenshot_$(date +\'%Y-%m-%d_%H-%M-%S\').png" | wl-copy',
+    -- ["Print"] = 'region=$(slurp) && grim -g "$region" - | tee "/home/adam/Pictures/Screenshots/Screenshot_$(date +\'%Y-%m-%d_%H-%M-%S\').png" | wl-copy',
 }
 
 for keys, cmd in pairs(app_binds) do
@@ -39,6 +39,11 @@ hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- hl.bind("SUPER + R", hl.dsp.send_shortcut({ mods = "SUPER", key = "R", window = "initialclass:^com.obsproject.Studio$" }))
 hl.bind("SUPER + R", hl.dsp.exec_cmd('pkill -SIGUSR1 -f "^gpu-screen-recorder"'))
+
+hl.bind("Print", function()
+    hl.exec_cmd("flameshot screen -e -n " .. tostring(hl.get_active_monitor().id) .. " -c -p '/home/adam/Pictures/Screenshots/Screenshot_'$(date +'%Y-%m-%d_%H-%M-%S')'.png'")
+    hl.timer(function() hl.config({ cursor = { zoom_factor = 1.0 } }) end, { type = "oneshot", timeout = 100 })
+end)
 
 -- Workspace Binds
 BindToNumbers("SUPER", function(i) return hl.dsp.focus({ workspace = tostring(i) }) end)

@@ -53,6 +53,18 @@ function Command(command)
     return nil
 end
 
+function ListDir(dir)
+    local t = {}
+    for line in io.popen("ls -pa " .. dir .. " | grep -v /"):lines() do
+        table.insert(t, line)
+    end
+    return t
+end
+
+function RandomChoice(t)
+    return t[math.random(#t)]
+end
+
 function TableToString(table)
     if type(table) ~= "table" then
         return tostring(table)
