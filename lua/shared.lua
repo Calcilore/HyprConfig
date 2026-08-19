@@ -84,12 +84,42 @@ function TableToString(table)
     return output .. " }"
 end
 
+local log_file = nil
 function Notif(message, timeout)
     if timeout == nil then
         timeout = 3000
     end
 
-    hl.notification.create({text = tostring(message), timeout = timeout})
+    message = TableToString(message)
+    hl.notification.create({text = message, timeout = timeout})
+    if log_file == nil then
+        local logs_dir = os.getenv("HOME") .. "/.config/hypr/logs"
+        hl.exec_cmd("mkdir -p " .. logs_dir)
+        local file_prefix = "session-" .. Command("date +%Y-%m-%d")
+        local file_suffix = 0
+        local function file_name() return file_prefix .. "-" .. tostring(file_suffix) .. ".log" end
+
+        local dir = ListDir(logs_dir)
+        while true do
+            local found = false
+            for _, file in ipairs(dir) do
+                if file == file_name() then
+                    found = true
+                    file_suffix = file_suffix + 1
+                    break
+                end
+            end
+            if not found then break end
+        end
+
+        log_file = io.open(logs_dir .. "/" .. file_name(), "w")
+        if log_file == nil then
+            hl.notification.create({text = "Failed to open log file", timeout = 5000})
+            return
+        end
+    end
+
+    log_file:write(message .. "\n")
 end
 
 function TernaryV(condition, a, b)
