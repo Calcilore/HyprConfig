@@ -10,6 +10,10 @@ local startup_commands = {
     "XDG_MENU_PREFIX=arch- kbuildsycoca6",
 }
 
+if Device == "main" then
+    table.insert(startup_commands, "shaderbg " .. Display_1 .. " ~/.config/hypr/shaders/number_clock_blanaced_ternary.frag")
+end
+
 local delay_startup_commands = {
     "corectrl --minimize-systray",
     "flatpak run com.github.wwmm.easyeffects",
