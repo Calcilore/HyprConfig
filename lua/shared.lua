@@ -85,13 +85,18 @@ function TableToString(table)
 end
 
 local log_file = nil
-function Notif(message, timeout)
+function Notif(message, timeout, do_log)
     if timeout == nil then
         timeout = 3000
     end
 
     message = TableToString(message)
     hl.notification.create({text = message, timeout = timeout})
+
+    if do_log == false then -- check == false because nil should not return
+        return
+    end
+
     if log_file == nil then
         local logs_dir = os.getenv("HOME") .. "/.config/hypr/logs"
         hl.exec_cmd("mkdir -p " .. logs_dir)
@@ -120,6 +125,7 @@ function Notif(message, timeout)
     end
 
     log_file:write(message .. "\n")
+    log_file:flush()
 end
 
 function TernaryV(condition, a, b)

@@ -1,4 +1,7 @@
 require("lua/shared")
+
+require("lua/tools/volume")
+
 require("lua/display")
 require("lua/startup")
 require("lua/vars")

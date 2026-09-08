@@ -66,12 +66,6 @@ end
 
 hl.bind("SUPER + mouse_up", function() zoom(1.5) end, { locked = true })
 hl.bind("SUPER + mouse_down", function() zoom(1/1.5) end, { locked = true })
-hl.bind("SUPER + CONTROL + mouse_up", function() zoom(1.1) end, { locked = true })
-hl.bind("SUPER + CONTROL + mouse_down", function() zoom(1/1.1) end, { locked = true })
-hl.bind("SUPER + EQUAL", function() zoom(1.5) end, { locked = true })
-hl.bind("SUPER + MINUS", function() zoom(1/1.5) end, { locked = true })
-hl.bind("SUPER + SHIFT + EQUAL", function() zoom(0) end, { locked = true })
-hl.bind("SUPER + SHIFT + MINUS", function() zoom(0) end, { locked = true })
 
 -- Mouse Hide
 local function hide_mouse()
@@ -82,8 +76,10 @@ end
 hl.bind("SUPER + Z", function() hide_mouse() end)
 
 -- Media
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), {locked = true, repeating = true})
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), {locked = true, repeating = true})
+hl.bind("XF86AudioLowerVolume", DspChangeVolume("-"), {locked = true, repeating = true})
+hl.bind("XF86AudioRaiseVolume", DspChangeVolume("+"), {locked = true, repeating = true})
+hl.bind("SUPER + CONTROL + mouse_down", DspChangeVolume("-"), {locked = true})
+hl.bind("SUPER + CONTROL + mouse_up", DspChangeVolume("+"), {locked = true})
 BindMany({"XF86AudioMute", "SUPER + Pause"}, hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), {locked = true})
 BindMany({"XF86AudioMicMute", "SUPER + Scroll_Lock"}, hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), {locked = true})
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl s 10%+"), {locked = true, repeating = true})
