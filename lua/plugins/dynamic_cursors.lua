@@ -12,7 +12,6 @@ local global_shape_rules = {
     cell = { rotate = { length = 0 } },
     all_scroll = { rotate = { length = 0 } },
     all_resize = { rotate = { length = 0 } },
-    -- default = { rotate = { offset = 180.0 } }
 }
 
 hl.config({plugin = {
@@ -169,14 +168,27 @@ apply_rules(nil)
 
 local last_focused_class = nil
 local function on_window_change(window)
-    local class = window.initial_class
+    -- fun fact, when you switch workspaces, hyprland still says you are focusing the window on the
+    -- workpace you were at before if you dont focus a window in the new workspace
+    -- So we only use the window if its on the current workspace
+    local open_workspace = hl.get_active_special_workspace()
+    if open_workspace == nil then open_workspace = hl.get_active_workspace() end
+
+    local class
+    if window == nil or window.workspace ~= open_workspace then
+        class = nil
+    else
+        class = window.initial_class
+    end
+
+    -- nothing changed, we do nothing
     if class == last_focused_class then
         return
     end
 
-    -- Notif("Cursor refresh " .. tostring(class))
+    Notif("Cursor refresh " .. tostring(class))
 
-    -- Clear rules which will not be overridden
+    -- Clear rules which will not be overridden by apply_rules
     local focused_rules = app_shape_rules[last_focused_class]
     if focused_rules ~= nil then
         for shape, _ in pairs(focused_rules) do
@@ -186,13 +198,12 @@ local function on_window_change(window)
         end
     end
 
+    -- apply all rules again
     apply_rules(class)
     last_focused_class = class
 end
-local function delay_on_window_change()
-    hl.timer(function() on_window_change(hl.get_active_window()) end, { timeout = 1000, type = "oneshot" })
-end
 
+-- hl.timer(function() on_window_change(hl.get_active_window()) end, { timeout = 1000, type = "repeat" })
 hl.on("window.active", on_window_change)
-hl.on("window.destroy", on_window_change)
+hl.on("window.destroy", function() on_window_change(hl.get_active_window()) end)
 
