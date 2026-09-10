@@ -38,7 +38,38 @@ hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- hl.bind("SUPER + R", hl.dsp.send_shortcut({ mods = "SUPER", key = "R", window = "initialclass:^com.obsproject.Studio$" }))
-hl.bind("SUPER + R", hl.dsp.exec_cmd('pkill -SIGUSR1 -f "^gpu-screen-recorder"'))
+hl.bind("SUPER + R", function()
+    local before = ListDir(ReplayFolder)
+    hl.exec_cmd('pkill -SIGUSR1 -f "^gpu-screen-recorder"')
+
+    -- keep checking to see if any new files appear
+    local timer
+    local i = 0
+    timer = hl.timer(function()
+        -- give up after 2 seconds
+        i = i + 1
+        if i > 20 then
+            timer:set_enabled(false)
+            Notif("Replay not found?")
+            return
+        end
+
+        local after = ListDir(ReplayFolder)
+        if #after > #before then
+            timer:set_enabled(false)
+
+            local new_file = "not found?"
+            for _, file in ipairs(after) do
+                if not table.contains(before, file) then
+                    new_file = file
+                    break
+                end
+            end
+
+            Notif("Saved replay to " .. new_file)
+        end
+    end, { timeout = 100, type = "repeat" })
+end)
 
 hl.bind("Print", function()
     hl.exec_cmd("flameshot screen -e -n " .. tostring(hl.get_active_monitor().id) .. " -c -p '/home/adam/Pictures/Screenshots/Screenshot_'$(date +'%Y-%m-%d_%H-%M-%S')'.png'")

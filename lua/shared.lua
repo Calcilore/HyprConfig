@@ -162,5 +162,17 @@ local function getDeviceName()
     return "main"
 end
 
+function table.contains(table, element)
+    for _, value in pairs(table) do
+        if value == element then
+            return true
+        end
+    end
+
+    return false
+end
+
 Device = getDeviceName()
+
+ReplayFolder = "/home/adam/Videos/obs-out/replays"
 
