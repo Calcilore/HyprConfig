@@ -186,7 +186,7 @@ local function on_window_change(window)
         return
     end
 
-    Notif("Cursor refresh " .. tostring(class))
+    -- Notif("Cursor refresh " .. tostring(class))
 
     -- Clear rules which will not be overridden by apply_rules
     local focused_rules = app_shape_rules[last_focused_class]
