@@ -16,7 +16,10 @@ hl.window_rule({ match = { float = false, workspace = "f[1]" }, rounding = 0 })
 -- Ignore maximize requests from apps. You'll probably like this.
 hl.window_rule({ suppress_event = "maximize" })
 
--- Window Rules
+-- Immediate
+hl.window_rule({ match = { class = ".*"}, immediate = true })
+
+-- Qalculate
 hl.window_rule({ match = { class = "^io.github.Qalculate.qalculate-qt$" }, float = true, center = true, size = {360, 800} })
 
 -- Jetbrains
@@ -35,4 +38,7 @@ hl.window_rule({ match = { class = "^steam$" }, group = "set" })
 
 -- Brave
 hl.window_rule({ match = { initial_title = ".* is sharing a window.$" }, workspace = "special:hidden silent" })
+
+-- Archipelago
+hl.window_rule({ match = { initial_title = "^Applications : ArchipelagoServ — Konsole$" }, workspace = "1" })
 
