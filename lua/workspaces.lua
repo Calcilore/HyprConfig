@@ -34,7 +34,8 @@ hl.window_rule({ match = { class = "^(kitty|org\\.kde\\.konsole)$" }, group = "s
 hl.window_rule({ match = { class = "^org.kde.dolphin$" }, workspace = "special:fileman silent" })
 
 -- Steam
-hl.window_rule({ match = { class = "^steam$" }, group = "set" })
+hl.window_rule({ match = { class = "^steam$" }, float = true })
+hl.window_rule({ match = { class = "^steam$", title = "^Steam$" }, group = "set", float = false })
 
 -- Brave
 hl.window_rule({ match = { initial_title = ".* is sharing a window.$" }, workspace = "special:hidden silent" })
