@@ -4,6 +4,8 @@ for i = 1, 10 do
 end
 
 hl.workspace_rule({ workspace = "11", monitor = Display_2 })
+hl.workspace_rule({ workspace = "12", monitor = Display_3 })
+hl.workspace_rule({ workspace = "13", monitor = Display_4 })
 
 -- Only have gaps when there is more than one window
 hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })

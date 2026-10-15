@@ -1,9 +1,13 @@
 function BindToNumbers(bind, callback)
-    for i = 1, 11 do
+    for i = 1, TernaryV(Device == "main", 13, 11) do
         if i == 10 then
             hl.bind(bind .. " + 0", callback(i))
         elseif i == 11 then
             hl.bind(bind .. " + grave", callback(i))
+        elseif i == 12 then
+            hl.bind(bind .. " + minus", callback(i))
+        elseif i == 13 then
+            hl.bind(bind .. " + equal", callback(i))
         else
             hl.bind(bind .. " + " .. i, callback(i))
         end
