@@ -111,7 +111,7 @@ hl.config({
         zoom_rigid = true,
         zoom_disable_aa = true,
         zoom_detached_camera = false,
-        -- no_warps = true,
+        no_warps = true,
     },
 
     debug = {

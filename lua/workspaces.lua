@@ -23,9 +23,10 @@ hl.window_rule({ match = { class = ".*"}, immediate = true })
 hl.window_rule({ match = { class = "^io.github.Qalculate.qalculate-qt$" }, float = true, center = true, size = {360, 800} })
 
 -- Jetbrains
-hl.window_rule({ match = { class = "^jetbrains-" }, focus_on_activate = true })
-hl.window_rule({ match = { class = "^jetbrains-", title = "^(?!win)", float = true }, dim_around = true, center = true })
-hl.window_rule({ match = { class = "^jetbrains-", title = "^win" }, no_anim = true, no_initial_focus = true, rounding = 0 })
+hl.window_rule({ match = { class = "^jetbrains-.*" }, focus_on_activate = true })
+hl.window_rule({ match = { class = "^jetbrains-.*", title = "^(?!win)", float = true }, dim_around = true, center = true })
+hl.window_rule({ match = { class = "^jetbrains-.*", title = "^win" }, no_anim = true, no_initial_focus = true, rounding = 0 })
+hl.window_rule({ match = { class = "^jetbrains-.*", title = "^$" }, group = "set" })
 
 -- Terminal
 hl.window_rule({ match = { class = "^(kitty|org\\.kde\\.konsole)$" }, group = "set", workspace = "special:terminal silent" })
