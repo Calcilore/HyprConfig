@@ -11,7 +11,10 @@ local startup_commands = {
 }
 
 if Device == "main" then
-    table.insert(startup_commands, "shaderbg " .. Display_1 .. " ~/.config/hypr/shaders/number_clock_blanaced_ternary.frag")
+    table.insert(startup_commands, "shaderbg --fps 1 " .. Display_1 .. " ~/.config/hypr/shaders/number_clock_blanaced_ternary.frag")
+    table.insert(startup_commands, "shaderbg --fps 1 " .. Display_2 .. " ~/.config/hypr/shaders/number_clock_base_6.frag")
+    table.insert(startup_commands, "shaderbg --fps 1 " .. Display_3 .. " ~/.config/hypr/shaders/number_clock_base_8.frag")
+    table.insert(startup_commands, "shaderbg --fps 1 " .. Display_4 .. " ~/.config/hypr/shaders/number_clock_base_2.frag")
 end
 
 local delay_startup_commands = {

@@ -52,11 +52,11 @@ local function keybind(toggle) return function()
 
     if autoclick_mode then
         autoclick_toggle = toggle
-        hl.bind("mouse:272", change_autoclicker(true, false))
-        hl.bind("mouse:273", change_autoclicker(true, true))
+        hl.bind("mouse:272", change_autoclicker(true, false), { ignore_mods = true })
+        hl.bind("mouse:273", change_autoclicker(true, true), { ignore_mods = true })
         if not toggle then
-            hl.bind("mouse:272", change_autoclicker(false, false), { release = true })
-            hl.bind("mouse:273", change_autoclicker(false, true), { release = true })
+            hl.bind("mouse:272", change_autoclicker(false, false), { release = true, ignore_mods = true })
+            hl.bind("mouse:273", change_autoclicker(false, true), { release = true, ignore_mods = true })
         end
     else
         autoclick_toggle = false

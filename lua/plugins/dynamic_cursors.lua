@@ -4,7 +4,7 @@ end
 
 local app_shape_rules = {
     ["Uncanny Cat Golf"] = { clientside = { rotate = { length = 48, offset = 45.0 } } },
-    steam = { clientside = { rotate = { length = 28, offset = 25 } } }
+    -- steam = { clientside = { rotate = { length = 28, offset = 25 } } }
 }
 
 local global_shape_rules = {
