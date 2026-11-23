@@ -98,6 +98,8 @@ end
 hl.bind("SUPER + mouse_up", function() zoom(1.5) end, { locked = true })
 hl.bind("SUPER + mouse_down", function() zoom(1/1.5) end, { locked = true })
 
+hl.gesture({ fingers = 2, mods = "SUPER", direction = "pinch", action = "cursor_zoom", zoom_level = 1, mode = "live" })
+
 -- Mouse Hide
 local function hide_mouse()
     local visible = hl.get_config("cursor.invisible")
